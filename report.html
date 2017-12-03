@@ -20205,20 +20205,40 @@ gSmSZgC3AmuWULZzzjnnOgGZZfd4cc4555xzzjlXCm/Bcs4555xzzrmUeIDlnHPOOeeccynxAMs5
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>回答：</strong></p>
-<ol>
-<li>如当交通信号灯为绿色，左侧无车，右侧车向右，迎面车也向右，且目的方向也为右。此刻向右行驶就是最优策略；</li>
-<li>查看算法的结果：('right', 'green', None, 'right', 'right')
+<ul>
+<li>所谓最优策略是指，小车在遵守交通规则的情况下，所选择的行动更接近目的地（即以最短路径抵达目的地），本题的表现就是尽量与waypoint的指示一致，我以下做了表格举例说明，如当交通信号灯为绿色，左侧无车，右侧车向右，迎面车也向右，且目的方向也为右。此刻向右行驶就是最优策略；</li>
+</ul>
+<table>
+<thead><tr>
+<th style="text-align:center">waypoint</th>
+<th style="text-align:center">inputs[light]</th>
+<th style="text-align:center">inputs[left]</th>
+<th style="text-align:center">inputs[right]</th>
+<th style="text-align:center">inputs[oncomming]</th>
+<th style="text-align:center">最优策略</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">right</td>
+<td style="text-align:center">green</td>
+<td style="text-align:center">None</td>
+<td style="text-align:center">right</td>
+<td style="text-align:center">right</td>
+<td style="text-align:center">right</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>查看log算法的结果如下，这个结果中最优策略的奖励高达0.62，其它行为奖励为0，或者为负，说明策略是正确的；：
+<pre><code>('right', 'green', None, 'right', 'right')
 -- forward : 0.00
--- None : 0.00
--- right : 2.25
--- left : 0.00
-这个结果中最优策略的奖励高达2.25，其它行为奖励为0，说明策略是正确的；</li>
-<li>('left', 'green', 'right', None, 'right')
--- forward : -0.02
--- None : -2.11
--- right : 1.25
--- left : -15.20 这个策略中，车子并没有向着目的方向（向左），且对于向前的行为也做了惩罚，可能是由于先前训练的车祸导致的。车子向目标的反方向行驶，躲避可能的交通事故，提高安全性。因此是个正确的策略。</li>
-</ol>
+-- None : -2.34
+-- right : 0.62
+-- left : 0.00</code></pre>
+</li>
+<li>没有不符合预期的行为策略。</li>
+</ul>
 
 </div>
 </div>
